@@ -1,0 +1,68 @@
+<div class="container mt-5">
+  <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 mx-auto">
+        <div class="mb-3">
+          <label for="inputUsername" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputUsername"
+            aria-describedby="usernameHelp"
+            formControlName="username"
+          />
+          <div id="usernameHelp" class="form-text">
+            Use only alphanumeric character at username
+          </div>
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              registerForm.controls['username'].invalid &&
+              (registerForm.controls['username'].dirty ||
+                registerForm.controls['username'].touched)
+            "
+          >
+            <div>Need username</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="inputEmail"
+            aria-describedby="emailHelp"
+            formControlName="email"
+          />
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              registerForm.controls['email'].invalid &&
+              (registerForm.controls['email'].dirty ||
+                registerForm.controls['email'].touched)
+            "
+          >
+            <div *ngIf="registerForm.controls['email'].errors?.['required']" >Need email</div>
+            <div *ngIf="registerForm.controls['email'].errors?.['email']" >Invalid email</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inputPassword" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword"
+            formControlName="password"
+          />
+        </div>
+        <div class="form-text text-danger" *ngIf="registerForm.controls['password'].invalid &&
+          (registerForm.controls['password'].dirty || registerForm.controls['password'].touched ) " >
+          <div>
+            Need password
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
